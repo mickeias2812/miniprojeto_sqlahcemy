@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar' if genero else 'Adicionar' }} Gênero{% endblock %}
+{% block content %}
+<h2 class="ui header">{{ 'Editar' if genero else 'Adicionar' }} Gênero</h2>
+<form class="ui form" method="POST">
+    <div class="field">
+        <label>Nome do Gênero</label>
+        <input type="text" name="nome" value="{{ genero.Nome_genero if genero else '' }}" required>
+    </div>
+    <button class="ui green button" type="submit">Salvar</button>
+    <a class="ui grey button" href="{{ url_for('listar_generos') }}">Cancelar</a>
+</form>
+{% endblock %}

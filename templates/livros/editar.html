@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar' if livro else 'Adicionar' }} Livro{% endblock %}
+{% block content %}
+<h2 class="ui header">{{ 'Editar' if livro else 'Adicionar' }} Livro</h2>
+<form class="ui form" method="POST">
+    <div class="field">
+        <label>Título</label>
+        <input type="text" name="titulo" value="{{ livro.Titulo if livro else '' }}" required>
+    </div>
+    <div class="field">
+        <label>Autor (ID)</label>
+        <input type="number" name="autor_id" value="{{ livro.Autor_id if livro else '' }}">
+    </div>
+    <div class="field">
+        <label>ISBN</label>
+        <input type="text" name="isbn" value="{{ livro.ISBN if livro else '' }}" required>
+    </div>
+    <div class="field">
+        <label>Ano de Publicação</label>
+        <input type="number" name="ano" value="{{ livro.Ano_publicacao if livro else '' }}">
+    </div>
+    <div class="field">
+        <label>Gênero (ID)</label>
+        <input type="number" name="genero_id" value="{{ livro.Genero_id if livro else '' }}">
+    </div>
+    <div class="field">
+        <label>Editora (ID)</label>
+        <input type="number" name="editora_id" value="{{ livro.Editora_id if livro else '' }}">
+    </div>
+    <div class="field">
+        <label>Quantidade Disponível</label>
+        <input type="number" name="quantidade" value="{{ livro.Quantidade_disponivel if livro else '' }}">
+    </div>
+    <div class="field">
+        <label>Resumo</label>
+        <textarea name="resumo">{{ livro.Resumo if livro else '' }}</textarea>
+    </div>
+    <button class="ui green button" type="submit">Salvar</button>
+    <a class="ui grey button" href="{{ url_for('listar_livros') }}">Cancelar</a>
+</form>
+{% endblock %}

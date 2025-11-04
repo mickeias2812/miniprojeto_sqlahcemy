@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Editoras{% endblock %}
+{% block content %}
+<h2 class="ui header">Editoras</h2>
+<a class="ui green button" href="{{ url_for('adicionar_editora') }}">Adicionar Editora</a>
+<table class="ui celled table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Endereço</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for editora in editoras %}
+        <tr>
+            <td>{{ editora.ID_editora }}</td>
+            <td>{{ editora.Nome_editora }}</td>
+            <td>{{ editora.Endereco_editora }}</td>
+            <td>
+                <a class="ui blue button" href="{{ url_for('editar_editora', id=editora.ID_editora) }}">Editar</a>
+                <a class="ui red button" href="{{ url_for('excluir_editora', id=editora.ID_editora) }}">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

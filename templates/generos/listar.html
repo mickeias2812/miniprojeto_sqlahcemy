@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Gêneros{% endblock %}
+{% block content %}
+<h2 class="ui header">Gêneros</h2>
+<a class="ui green button" href="{{ url_for('adicionar_genero') }}">Adicionar Gênero</a>
+<table class="ui celled table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for genero in generos %}
+        <tr>
+            <td>{{ genero.ID_genero }}</td>
+            <td>{{ genero.Nome_genero }}</td>
+            <td>
+                <a class="ui blue button" href="{{ url_for('editar_genero', id=genero.ID_genero) }}">Editar</a>
+                <a class="ui red button" href="{{ url_for('excluir_genero', id=genero.ID_genero) }}">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

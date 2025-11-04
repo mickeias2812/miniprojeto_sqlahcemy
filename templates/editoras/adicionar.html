@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar' if editora else 'Adicionar' }} Editora{% endblock %}
+{% block content %}
+<h2 class="ui header">{{ 'Editar' if editora else 'Adicionar' }} Editora</h2>
+<form class="ui form" method="POST">
+    <div class="field">
+        <label>Nome</label>
+        <input type="text" name="nome" value="{{ editora.Nome_editora if editora else '' }}" required>
+    </div>
+    <div class="field">
+        <label>Endereço</label>
+        <textarea name="endereco">{{ editora.Endereco_editora if editora else '' }}</textarea>
+    </div>
+    <button class="ui green button" type="submit">Salvar</button>
+    <a class="ui grey button" href="{{ url_for('listar_editoras') }}">Cancelar</a>
+</form>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar' if usuario else 'Adicionar' }} Usuário{% endblock %}
+{% block content %}
+<h2 class="ui header">{{ 'Editar' if usuario else 'Adicionar' }} Usuário</h2>
+<form class="ui form" method="POST">
+    <div class="field">
+        <label>Nome</label>
+        <input type="text" name="nome" value="{{ usuario.Nome_usuario if usuario else '' }}" required>
+    </div>
+    <div class="field">
+        <label>Email</label>
+        <input type

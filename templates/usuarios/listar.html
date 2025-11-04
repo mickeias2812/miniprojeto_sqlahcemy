@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Usuários{% endblock %}
+{% block content %}
+<h2 class="ui header">Usuários</h2>
+<a class="ui green button" href="{{ url_for('adicionar_usuario') }}">Adicionar Usuário</a>
+<table class="ui celled table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Data de Inscrição</th>
+            <th>Multa</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for usuario in usuarios %}
+        <tr>
+            <td>{{ usuario.ID_usuario }}</td>
+            <td>{{ usuario.Nome_usuario }}</td>
+            <td>{{ usuario.Email }}</td>
+            <td>{{ usuario.Numero_telefone }}</td>
+            <td>{{ usuario.Data_inscricao }}</td>
+            <td>{{ usuario.Multa_atual }}</td>
+            <td>
+                <a class="ui blue button" href="{{ url_for('editar_usuario', id=usuario.ID_usuario) }}">Editar</a>
+                <a class="ui red button" href="{{ url_for('excluir_usuario', id=usuario.ID_usuario) }}">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

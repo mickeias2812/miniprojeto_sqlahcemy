@@ -1,0 +1,49 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sistema Biblioteca{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <style>
+        body {
+            margin: 20px;
+        }
+        .menu {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu de Navegação -->
+    <div class="ui menu">
+        <a class="item" href="{{ url_for('index') }}">Home</a>
+        <a class="item" href="{{ url_for('listar_autores') }}">Autores</a>
+        <a class="item" href="{{ url_for('listar_generos') }}">Gêneros</a>
+        <a class="item" href="{{ url_for('listar_editoras') }}">Editoras</a>
+        <a class="item" href="{{ url_for('listar_livros') }}">Livros</a>
+        <a class="item" href="{{ url_for('listar_usuarios') }}">Usuários</a>
+        <a class="item" href="{{ url_for('listar_emprestimos') }}">Empréstimos</a>
+    </div>
+
+    <!-- Mensagens de flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="ui container">
+                {% for category, message in messages %}
+                    <div class="ui {{ category }} message">
+                        <p>{{ message }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Conteúdo Dinâmico -->
+    <div class="ui container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

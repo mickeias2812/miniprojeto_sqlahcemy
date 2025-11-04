@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Livros{% endblock %}
+{% block content %}
+<h2 class="ui header">Livros</h2>
+<a class="ui green button" href="{{ url_for('adicionar_livro') }}">Adicionar Livro</a>
+<table class="ui celled table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>ISBN</th>
+            <th>Ano</th>
+            <th>Gênero</th>
+            <th>Editora</th>
+            <th>Qtd Disponível</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for livro in livros %}
+        <tr>
+            <td>{{ livro.ID_livro }}</td>
+            <td>{{ livro.Titulo }}</td>
+            <td>{{ livro.Autor_id }}</td>
+            <td>{{ livro.ISBN }}</td>
+            <td>{{ livro.Ano_publicacao }}</td>
+            <td>{{ livro.Genero_id }}</td>
+            <td>{{ livro.Editora_id }}</td>
+            <td>{{ livro.Quantidade_disponivel }}</td>
+            <td>
+                <a class="ui blue button" href="{{ url_for('editar_livro', id=livro.ID_livro) }}">Editar</a>
+                <a class="ui red button" href="{{ url_for('excluir_livro', id=livro.ID_livro) }}">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
