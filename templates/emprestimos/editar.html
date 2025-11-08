@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Editar Empréstimo{% endblock %}
+
+{% block content %}
+<h2 class="ui header">Editar Empréstimo</h2>
+
+<form class="ui form" method="POST">
+
+    <div class="field">
+        <label>Usuário</label>
+        <select name="usuario" class="ui dropdown" required>
+            {% for u in usuarios %}
+            <option value="{{ u.ID_usuario }}" 
+                {% if u.ID_usuario == emprestimo.Usuario_id %}selected{% endif %}>
+                {{ u.Nome_usuario }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="field">
+        <label>Livro</label>
+        <select name="livro" class="ui dropdown" required>
+            {% for l in livros %}
+            <option value="{{ l.ID_livro }}"
+                {% if l.ID_livro == emprestimo.Livro_id %}selected{% endif %}>
+                {{ l.Titulo }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="field">
+        <label>Data de Empréstimo</label>
+        <input type="date" name="data_emprestimo" value="{{ emprestimo.Data_emprestimo }}">
+    </div>
+
+    <div class="field">
+        <label>Data Prevista de Devolução</label>
+        <input type="date" name="data_prevista" value="{{ emprestimo.Data_devolucao_prevista }}">
+    </div>
+
+    <div class="field">
+        <label>Status</label>
+        <select name="status" class="ui dropdown">
+            <option value="Em andamento" {% if emprestimo.Status_emprestimo == 'Em andamento' %}selected{% endif %}>Em andamento</option>
+            <option value="Atrasado" {% if emprestimo.Status_emprestimo == 'Atrasado' %}selected{% endif %}>Atrasado</option>
+            <option value="Devolvido" {% if emprestimo.Status_emprestimo == 'Devolvido' %}selected{% endif %}>Devolvido</option>
+        </select>
+    </div>
+
+    <button class="ui green button" type="submit">Salvar alterações</button>
+    <a class="ui grey button" href="{{ url_for('listar_emprestimos') }}">Cancelar</a>
+
+</form>
+
+{% endblock %}

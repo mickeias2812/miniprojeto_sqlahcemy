@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Empréstimos{% endblock %}
+
+{% block content %}
+<h2 class="ui header">Lista de Empréstimos</h2>
+
+<a href="{{ url_for('adicionar_emprestimo') }}" class="ui green button">
+    + Novo Empréstimo
+</a>
+
+<table class="ui celled table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Usuário</th>
+            <th>Livro</th>
+            <th>Data Empréstimo</th>
+            <th>Data Prevista</th>
+            <th>Status</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for emp in emprestimos %}
+        <tr>
+            <td>{{ emp.ID_emprestimo }}</td>
+            <td>{{ emp.Nome_usuario }}</td>
+            <td>{{ emp.Titulo }}</td>
+            <td>{{ emp.Data_emprestimo }}</td>
+            <td>{{ emp.Data_devolucao_prevista }}</td>
+            <td>{{ emp.Status_emprestimo }}</td>
+            <td>
+                <a class="ui blue button" href="{{ url_for('editar_emprestimo', id=emp.ID_emprestimo) }}">Editar</a>
+                <a class="ui red button" href="{{ url_for('excluir_emprestimo', id=emp.ID_emprestimo) }}">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
