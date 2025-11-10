@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Adicionar Empréstimo{% endblock %}
+
+{% block content %}
+<h2 class="ui header">Adicionar Empréstimo</h2>
+
+<form class="ui form" method="POST">
+
+    <div class="field">
+        <label>Usuário</label>
+        <select name="usuario" class="ui dropdown" required>
+            <option value="">Selecione um usuário</option>
+            {% for u in usuarios %}
+            <option value="{{ u.ID_usuario }}">{{ u.Nome_usuario }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="field">
+        <label>Livro</label>
+        <select name="livro" class="ui dropdown" required>
+            <option value="">Selecione um livro</option>
+            {% for l in livros %}
+            <option value="{{ l.ID_livro }}">{{ l.Titulo }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="field">
+        <label>Data de Empréstimo</label>
+        <input type="date" name="data_emprestimo" required>
+    </div>
+
+    <div class="field">
+        <label>Data Prevista de Devolução</label>
+        <input type="date" name="data_prevista" required>
+    </div>
+
+    <div class="field">
+        <label>Status</label>
+        <select name="status" class="ui dropdown" required>
+            <option value="Em andamento">Em andamento</option>
+            <option value="Atrasado">Atrasado</option>
+            <option value="Devolvido">Devolvido</option>
+        </select>
+    </div>
+
+    <button class="ui green button" type="submit">Salvar</button>
+    <a class="ui grey button" href="{{ url_for('listar_emprestimos') }}">Cancelar</a>
+
+</form>
+{% endblock %}

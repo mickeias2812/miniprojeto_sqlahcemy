@@ -1,0 +1,173 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sistema Biblioteca{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            margin: 20px;
+        }
+        .menu {
+            margin-bottom: 20px;
+        }
+        /* Modal de Confirmação */
+        .confirmation-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from { 
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .modal-header {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #d9534f;
+        }
+        
+        .modal-text {
+            margin-bottom: 25px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
+        .modal-buttons .ui.button {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Mensagens de flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="ui {{ category }} message">
+                    <i class="close icon"></i>
+                    <p>{{ message }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Menu de Navegação -->
+    <div class="ui menu">
+        <a class="item" href="{{ url_for('index') }}">Home</a>
+        <a class="item" href="{{ url_for('listar_autores') }}">Autores</a>
+        <a class="item" href="{{ url_for('listar_generos') }}">Gêneros</a>
+        <a class="item" href="{{ url_for('listar_editoras') }}">Editoras</a>
+        <a class="item" href="{{ url_for('listar_livros') }}">Livros</a>
+        <a class="item" href="{{ url_for('listar_usuarios') }}">Usuários</a>
+        <a class="item" href="{{ url_for('listar_emprestimos') }}">Empréstimos</a>
+    </div>
+
+    <!-- Modal de Confirmação -->
+    <div id="confirmationModal" class="confirmation-modal">
+        <div class="modal-content">
+            <div class="modal-header">⚠️ Confirmar Exclusão</div>
+            <div class="modal-text" id="confirmationText"></div>
+            <div class="modal-buttons">
+                <button class="ui grey button" onclick="closeConfirmation()">Cancelar</button>
+                <button class="ui red button" onclick="confirmDelete()">Sim, Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conteúdo Dinâmico -->
+    <div class="ui container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <script>
+        let deleteUrl = null;
+
+        // Fechar mensagens ao clicar no X
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.ui.message .close').forEach(function(closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    this.parentElement.style.display = 'none';
+                });
+            });
+
+            // Interceptar cliques nos botões de excluir
+            document.querySelectorAll('a.ui.red.button[href*="/excluir/"]').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const url = this.getAttribute('href');
+                    const itemName = this.parentElement.parentElement.querySelector('td:nth-child(2)')?.textContent || 'item';
+                    
+                    deleteUrl = url;
+                    showConfirmation(itemName);
+                });
+            });
+        });
+
+        function showConfirmation(itemName) {
+            document.getElementById('confirmationText').innerHTML = 
+                `Tem certeza que deseja excluir <strong>"${itemName.trim()}"</strong>?<br><br>Esta ação não pode ser desfeita.`;
+            document.getElementById('confirmationModal').style.display = 'block';
+        }
+
+        function closeConfirmation() {
+            document.getElementById('confirmationModal').style.display = 'none';
+            deleteUrl = null;
+        }
+
+        function confirmDelete() {
+            if (deleteUrl) {
+                window.location.href = deleteUrl;
+            }
+        }
+
+        // Fechar modal ao clicar fora
+        window.onclick = function(event) {
+            const modal = document.getElementById('confirmationModal');
+            if (event.target == modal) {
+                closeConfirmation();
+            }
+        }
+    </script>
+</body>
+</html>

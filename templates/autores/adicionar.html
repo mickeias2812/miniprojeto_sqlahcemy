@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar' if autor else 'Adicionar' }} Autor{% endblock %}
+{% block content %}
+<h2 class="ui header">{{ 'Editar' if autor else 'Adicionar' }} Autor</h2>
+<form class="ui form" method="POST">
+    <div class="field">
+        <label>Nome</label>
+        <input type="text" name="nome" value="{{ autor.Nome_autor if autor else '' }}" required>
+    </div>
+    <div class="field">
+        <label>Nacionalidade</label>
+        <input type="text" name="nacionalidade" value="{{ autor.Nacionalidade if autor else '' }}">
+    </div>
+    <div class="field">
+        <label>Data de Nascimento</label>
+        <input type="date" name="data_nascimento" value="{{ autor.Data_nascimento if autor else '' }}">
+    </div>
+    <div class="field">
+        <label>Biografia</label>
+        <textarea name="biografia">{{ autor.Biografia if autor else '' }}</textarea>
+    </div>
+    <button class="ui green button" type="submit">Salvar</button>
+    <a class="ui grey button" href="{{ url_for('listar_autores') }}">Cancelar</a>
+</form>
+{% endblock %}
