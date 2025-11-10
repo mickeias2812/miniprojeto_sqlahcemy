@@ -9,7 +9,6 @@ app.secret_key = "MEGA_SUPER_DIFICIL"  # para mensagens flash
 def index():
     return render_template("base.html")
 
-
 # -------------------- AUTORES --------------------
 @app.route('/autores/adicionar', methods=['GET','POST'])
 def adicionar_autor():
@@ -82,7 +81,6 @@ def excluir_autor(id):
     conn.close()
     return redirect(url_for('listar_autores'))
 
-
 # -------------------- GÊNEROS --------------------
 @app.route('/generos')
 def listar_generos():
@@ -145,8 +143,6 @@ def excluir_genero(id):
 
 
 # -------------------- LIVROS --------------------
-
-# Adicionar livro
 @app.route('/livros/adicionar', methods=['GET', 'POST'])
 def adicionar_livro():
     conn = get_connection()

@@ -1,0 +1,209 @@
+/* =========================================
+   GLOBAL
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #eef1f5;
+    padding: 40px;
+    color: #333;
+}
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.container {
+    width: 95%;
+    max-width: 900px;
+    background: #ffffff;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.07);
+}
+
+/* =========================================
+   TÍTULOS
+========================================= */
+
+h1 {
+    color: #2c3e50;
+    font-size: 32px;
+    margin-bottom: 18px;
+    text-align: center;
+}
+
+h2, h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* =========================================
+   PARÁGRAFOS
+========================================= */
+
+p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* =========================================
+   MENU (Homepage)
+========================================= */
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+/* =========================================
+   BOTÕES
+========================================= */
+
+.btn, button {
+    padding: 12px 22px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.25s;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: #4a90e2;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #357ABD;
+}
+
+.btn-danger {
+    background: #e74c3c;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background: #c0392b;
+}
+
+.btn-success {
+    background: #27ae60;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background: #1e874b;
+}
+
+/* =========================================
+   TABELA
+========================================= */
+
+table {
+    width: 100%;
+    margin-top: 25px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+th {
+    background: #4a90e2;
+    color: #fff;
+    padding: 14px;
+    font-size: 15px;
+    text-align: left;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid #e6e6e6;
+    font-size: 14px;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background: #f7fbff;
+}
+
+/* =========================================
+   FORMULÁRIOS
+========================================= */
+
+form {
+    margin-top: 25px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #2c3e50;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+    margin-bottom: 18px;
+    font-size: 14px;
+    background: #fcfcfc;
+    transition: 0.25s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+/* =========================================
+   LINKS DE AÇÃO
+========================================= */
+
+.action-links a {
+    margin-right: 16px;
+    font-weight: 500;
+    color: #4a90e2;
+    text-decoration: none;
+}
+
+.action-links a:hover {
+    text-decoration: underline;
+}
+
+/* =========================================
+   RODAPÉ
+========================================= */
+
+footer {
+    text-align: center;
+    margin-top: 35px;
+    font-size: 13px;
+    color: #7f8c8d;
+}
